@@ -1,0 +1,1 @@
+hari06@hari06-VirtualBox:~/Desktop$ scp -r test username@ipaddr:/home/username/Desktop

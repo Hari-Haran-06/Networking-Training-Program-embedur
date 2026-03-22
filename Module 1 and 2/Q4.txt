@@ -1,0 +1,32 @@
+hari06@hari06-VirtualBox:~$ ifconfig
+enp0s3: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 10.0.2.15  netmask 255.255.255.0  broadcast 10.0.2.255
+        inet6 fe80::a00:27ff:fef0:9763  prefixlen 64  scopeid 0x20<link>
+        inet6 fd17:625c:f037:2:ab0a:fba4:bdd2:7d2a  prefixlen 64  scopeid 0x0<global>
+        inet6 fd17:625c:f037:2:a00:27ff:fef0:9763  prefixlen 64  scopeid 0x0<global>
+        ether 08:00:27:f0:97:63  txqueuelen 1000  (Ethernet)
+        RX packets 7821  bytes 8720564 (8.7 MB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 2239  bytes 171793 (171.7 KB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        inet6 ::1  prefixlen 128  scopeid 0x10<host>
+        loop  txqueuelen 1000  (Local Loopback)
+        RX packets 535  bytes 40033 (40.0 KB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 535  bytes 40033 (40.0 KB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+hari06@hari06-VirtualBox:~$ arp -n
+Address                  HWtype  HWaddress           Flags Mask            Iface
+10.0.2.2                 ether   52:55:0a:00:02:02   C                     enp0s3
+
+hari06@hari06-VirtualBox:/home$ ping 10.0.2.15
+PING 10.0.2.15 (10.0.2.15) 56(84) bytes of data.
+64 bytes from 10.0.2.15: icmp_seq=1 ttl=64 time=0.027 ms
+64 bytes from 10.0.2.15: icmp_seq=2 ttl=64 time=0.026 ms
+64 bytes from 10.0.2.15: icmp_seq=3 ttl=64 time=0.033 ms
+64 bytes from 10.0.2.15: icmp_seq=4 ttl=64 time=0.028 ms
+64 bytes from 10.0.2.15: icmp_seq=5 ttl=64 time=0.030 ms

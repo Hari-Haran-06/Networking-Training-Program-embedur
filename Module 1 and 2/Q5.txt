@@ -1,0 +1,62 @@
+When duplicate IP addresses are configured in a network, two or more
+devices are assigned the same IP address. Since an IP address must
+uniquely identify a device in a network, this causes an IP conflict and
+communication problems.
+
+1. Network Communication Failure
+
+If two devices share the same IP address, the network cannot determine
+which device should receive the data. Packets may go to the wrong device
+or be dropped.
+
+Example: Device A → 192.168.1.10
+Device B → 192.168.1.10
+
+If another device sends data to 192.168.1.10, the network cannot
+distinguish between the two devices.
+
+2. ARP Conflicts
+
+Inside a LAN, devices use Address Resolution Protocol (ARP) to map IP
+addresses to MAC addresses.
+
+Example:
+
+PC1 → IP: 192.168.1.10, MAC: AA:AA:AA:AA
+PC2 → IP: 192.168.1.10, MAC: BB:BB:BB:BB
+
+The ARP table may constantly change between the two MAC addresses,
+causing unstable communication.
+
+3. Intermittent Connectivity
+
+Users may experience: - Sometimes the network works - Sometimes it
+fails - Ping responses may come from different devices
+
+4. Operating System Warnings
+
+Many systems detect duplicate IP addresses automatically.
+
+Example message: “IP address conflict detected. Another device on the
+network is using this IP address.”
+
+5. DHCP Issues
+
+Duplicate IP conflicts may occur when: - A device manually sets an IP
+already assigned by DHCP - DHCP lease records are outdated - Static IP
+overlaps with the DHCP pool
+
+6. Network Performance Problems
+
+Duplicate IPs can cause: - Packet loss - Slow network performance -
+Connection drops - Network services becoming unreachable
+
+7. Example Scenario
+
+Router → 192.168.1.1
+PC1 → 192.168.1.10
+PC2 → 192.168.1.10 (duplicate)
+
+Process: 1. ARP request is broadcast 2. Both devices reply 3. ARP table
+changes repeatedly 4. Data may reach the wrong device
+
