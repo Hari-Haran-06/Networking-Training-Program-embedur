@@ -1,3 +1,0 @@
-DHCP 
-
-https://www.geeksforgeeks.org/computer-networks/dynamic-host-configuration-protocol-dhcp/
