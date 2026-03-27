@@ -1,0 +1,126 @@
+hari06@hari06-VirtualBox:~$ sudo apt install vsftpd ftp ufw
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+ftp is already the newest version (20230507-2build3).
+ftp set to manually installed.
+ufw is already the newest version (0.36.2-6).
+ufw set to manually installed.
+The following package was automatically installed and is no longer required:
+  libllvm19
+Use 'sudo apt autoremove' to remove it.
+The following NEW packages will be installed:
+  vsftpd
+0 upgraded, 1 newly installed, 0 to remove and 92 not upgraded.
+Need to get 120 kB of archives.
+After this operation, 312 kB of additional disk space will be used.
+Do you want to continue? [Y/n] y
+Get:1 http://in.archive.ubuntu.com/ubuntu noble-updates/main amd64 vsftpd amd64 3.0.5-0ubuntu3.1 [120 kB]
+Fetched 120 kB in 1s (102 kB/s)
+Preconfiguring packages ...
+Selecting previously unselected package vsftpd.
+(Reading database ... 216842 files and directories currently installed.)
+Preparing to unpack .../vsftpd_3.0.5-0ubuntu3.1_amd64.deb ...
+Unpacking vsftpd (3.0.5-0ubuntu3.1) ...
+Setting up vsftpd (3.0.5-0ubuntu3.1) ...
+Created symlink /etc/systemd/system/multi-user.target.wants/vsftpd.service → /usr/lib/systemd/system/vsftpd.service.
+Processing triggers for man-db (2.12.0-4build2) ...
+
+hari06@hari06-VirtualBox:~$ systemctl status vsftpd
+● vsftpd.service - vsftpd FTP server
+     Loaded: loaded (/usr/lib/systemd/system/vsftpd.service; enabled; preset: enabled)
+     Active: active (running) since Wed 2026-03-11 07:48:49 IST; 47s ago
+    Process: 4149 ExecStartPre=/bin/mkdir -p /var/run/vsftpd/empty (code=exited, status=0/SUCCESS)
+   Main PID: 4151 (vsftpd)
+      Tasks: 1 (limit: 23255)
+     Memory: 928.0K (peak: 1.6M)
+        CPU: 23ms
+     CGroup: /system.slice/vsftpd.service
+             └─4151 /usr/sbin/vsftpd /etc/vsftpd.conf
+
+Mar 11 07:48:49 hari06-VirtualBox systemd[1]: Starting vsftpd.service - vsftpd FTP server...
+Mar 11 07:48:49 hari06-VirtualBox systemd[1]: Started vsftpd.service - vsftpd FTP server.
+
+hari06@hari06-VirtualBox:~$ sudo useradd -m ftp_client
+[sudo] password for hari06:
+
+hari06@hari06-VirtualBox:~$ sudo passwd ftp_client
+New password: 
+BAD PASSWORD: The password is shorter than 8 characters
+Retype new password: 
+Sorry, passwords do not match.
+New password: hariharan
+Retype new password: hariharan
+passwd: password updated successfully
+
+hari06@hari06-VirtualBox:~$ sudo -u ftp_client sh -c 'echo "This is test file." > /home/ftp_client/test.txt'
+
+hari06@hari06-VirtualBox:~$ ftp localhost
+Connected to localhost.
+220 (vsFTPd 3.0.5)
+Name (localhost:hari06): ftp_client
+331 Please specify the password.
+Password: 
+230 Login successful.
+Remote system type is UNIX.
+Using binary mode to transfer files.
+ftp> ls /home/ftp_client/
+229 Entering Extended Passive Mode (|||53086|)
+150 Here comes the directory listing.
+-rw-rw-r--    1 1001     1001           19 Mar 11 08:43 test.txt
+226 Directory send OK.
+ftp> less test.txt
+This is test file.
+ftp> exit
+221 Goodbye.
+
+hari06@hari06-VirtualBox:~$ ftp localhost
+Connected to localhost.
+220 (vsFTPd 3.0.5)
+Name (localhost:hari06): ftp_client
+331 Please specify the password.
+Password: 
+230 Login successful.
+Remote system type is UNIX.
+Using binary mode to transfer files.
+ftp> cd /home/ftp_client
+250 Directory successfully changed.
+ftp> ls
+229 Entering Extended Passive Mode (|||38311|)
+150 Here comes the directory listing.
+-rw-rw-r--    1 1001     1001           19 Mar 11 08:43 test.txt
+226 Directory send OK.
+ftp> get test.txt
+local: test.txt remote: test.txt
+229 Entering Extended Passive Mode (|||22746|)
+150 Opening BINARY mode data connection for test.txt (19 bytes).
+100% |******************************************************************************************|    19       44.17 KiB/s    00:00 ETA
+226 Transfer complete.
+19 bytes received in 00:00 (13.20 KiB/s)
+ftp> exit
+221 Goodbye.
+
+hari06@hari06-VirtualBox:~$ ls
+Desktop  Documents  Downloads  Music  Pictures  Public  snap  Templates  test.txt  Videos
+
+hari06@hari06-VirtualBox:~$ echo "This is for uploading." > upload.txt
+hari06@hari06-VirtualBox:~$ ls
+Desktop  Documents  Downloads  Music  Pictures  Public  snap  Templates  test.txt  upload.txt  Videos
+
+hari06@hari06-VirtualBox:/etc$ sudo cp vsftpd.conf vsftpd.conf.backup
+hari06@hari06-VirtualBox:/etc$ ls vsftpd.*
+vsftpd.conf  vsftpd.conf.backup
+
+ftp> put upload.txt
+local: upload.txt remote: upload.txt
+229 Entering Extended Passive Mode (|||29329|)
+150 Ok to send data.
+100% |******************************************************************************************|    23      204.18 KiB/s    00:00 ETA
+226 Transfer complete.
+23 bytes sent in 00:00 (38.19 KiB/s)
+ftp> ls
+229 Entering Extended Passive Mode (|||59390|)
+150 Here comes the directory listing.
+-rw-rw-r--    1 1001     1001           19 Mar 11 08:43 test.txt
+-rw-------    1 1001     1001           23 Mar 11 08:58 upload.txt
+226 Directory send OK.

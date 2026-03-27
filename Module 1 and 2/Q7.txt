@@ -1,0 +1,25 @@
+C:\Users\svhar>ipconfig
+
+Wireless LAN adapter Wi-Fi:
+
+   Connection-specific DNS Suffix  . :
+   IPv6 Address. . . . . . . . . . . : 2405:201:e048:30c6:564f:1d97:910:ca5d
+   Temporary IPv6 Address. . . . . . : 2405:201:e048:30c6:ad26:47a5:edf6:af01
+   Link-local IPv6 Address . . . . . : fe80::9071:9d3a:5939:a6f7%13
+   IPv4 Address. . . . . . . . . . . : 192.168.29.102
+   Subnet Mask . . . . . . . . . . . : 255.255.255.0
+   Default Gateway . . . . . . . . . : fe80::6ec2:42ff:fe1b:4f49%13
+                                       192.168.29.1
+
+C:\Users\svhar>ping 192.168.29.1
+
+Pinging 192.168.29.1 with 32 bytes of data:
+Reply from 192.168.29.1: bytes=32 time=2ms TTL=64
+Reply from 192.168.29.1: bytes=32 time=2ms TTL=64
+Reply from 192.168.29.1: bytes=32 time=2ms TTL=64
+Reply from 192.168.29.1: bytes=32 time=2ms TTL=64
+
+Ping statistics for 192.168.29.1:
+    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 2ms, Maximum = 2ms, Average = 2ms

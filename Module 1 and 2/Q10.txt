@@ -1,0 +1,16 @@
+1. DHCP Discover
+•	A new device (client) joins the network and has no IP. 
+•	It broadcasts a DHCP Discover message to locate available DHCP servers. 
+2. DHCP Offer
+•	DHCP server receives the discover message. 
+•	It selects an available IP from its IP pool and sends a DHCP Offer to the client. 
+•	The offer includes: IP address, subnet mask, default gateway, lease time, DNS servers. 
+3. DHCP Request
+•	The client responds with a DHCP Request, indicating it wants to use the offered IP. 
+•	This message may also be broadcast so all DHCP servers know which IP the client accepted. 
+4. DHCP Acknowledge
+•	The DHCP server confirms with a DHCP ACK, officially leasing the IP to the client for a specific lease time. 
+•	The client configures its network interface with the provided IP, gateway, and DNS.
+
+
+https://www.geeksforgeeks.org/computer-networks/dynamic-host-configuration-protocol-dhcp/
